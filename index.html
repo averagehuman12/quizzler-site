@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Quizzler</title>
+  <style>
+    body { background: #375362; color: white; font-family: Arial, sans-serif; padding: 20px; }
+    #question {
+      background: white; color: #375362;
+      padding: 1em; margin: 1em 0; border-radius: 8px;
+      min-height: 60px; display: flex; align-items: center; justify-content: center;
+    }
+    button {
+      width: 100px; height: 40px; margin: 0 10px;
+      border: none; border-radius: 6px; font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quizzler</h1>
+  <div id="score">Score: 0</div>
+  <div id="question">Loading…</div>
+  <button id="btn-true">True</button>
+  <button id="btn-false">False</button>
+
+  <script>
+    // 1) Define your questions
+const questions = [
+  { text: "Langit berwarna biru.", answer: "True" },
+  { text: "Kucing adalah reptil.", answer: "False" },
+  { text: "2 + 2 = 4.", answer: "True" },
+  { text: "Bumi itu datar.", answer: "False" },
+  { text: "Petir tidak pernah menyambar tempat yang sama dua kali.", answer: "False" },
+  { text: "Manusia berbagi 50% DNA mereka dengan pisang.", answer: "True" },
+  { text: "Ikan mas memiliki rentang memori hanya tiga detik.", answer: "False" },
+  { text: "Tembok Besar Tiongkok terlihat dari luar angkasa.", answer: "False" },
+  { text: "Manusia dewasa memiliki lebih sedikit tulang daripada bayi.", answer: "True" },
+  { text: "Suara merambat lebih cepat di air daripada di udara.", answer: "True" },
+  { text: "Venus adalah planet terpanas di tata surya kita.", answer: "True" },
+  { text: "Hiu adalah mamalia.", answer: "False" },
+  { text: "Gunung Everest adalah gunung tertinggi di atas permukaan laut.", answer: "True" },
+  { text: "Kelelawar itu buta.", answer: "False" },
+  { text: "Gurita memiliki tiga jantung.", answer: "True" },
+  { text: "Madu tidak pernah basi dan dapat dimakan setelah ribuan tahun.", answer: "True" },
+  { text: "Pisang tumbuh di pohon.", answer: "False" },
+  { text: "Sehari di Venus lebih lama daripada setahun di Venus.", answer: "True" },
+  { text: "Ada lebih banyak bintang di alam semesta daripada butir pasir di Bumi.", answer: "True" },
+  { text: "Elektron lebih besar dari atom.", answer: "False" },
+  { text: "Lidah adalah otot terkuat di tubuh manusia.", answer: "False" },
+  { text: "Merinding disebabkan oleh dingin atau ketakutan.", answer: "True" },
+  { text: "Suara tidak dapat merambat melalui ruang hampa.", answer: "True" },
+  { text: "Petir lebih panas daripada permukaan matahari.", answer: "True" },
+  { text: "Gurita memiliki sembilan otak.", answer: "False" },
+  { text: "Bersin dapat bergerak lebih cepat dari 100 mil per jam.", answer: "True" },
+  { text: "Penguin dapat terbang.", answer: "False" },
+  { text: "Venus berotasi pada porosnya berlawanan arah dengan sebagian besar planet.", answer: "True" },
+  { text: "Unta menyimpan air di punuknya.", answer: "False" },
+  { text: "Jantung udang terletak di kepalanya.", answer: "True" }
+];
+
+
+    const questions = [
+      
+
+      // …add up to 10 or more
+    ];
+
+    // 2) State variables
+    let idx = 0, score = 0;
+
+    // 3) References to DOM elements
+    const scoreEl = document.getElementById("score");
+    const qEl     = document.getElementById("question");
+
+    // 4) Render current question/score
+    function show() {
+      scoreEl.textContent = `Score: ${score}/${idx}`;
+      if (idx < questions.length) {
+        qEl.textContent = questions[idx].text;
+        qEl.style.backgroundColor = "white";
+      } else {
+        qEl.textContent = "You have reached the end!";
+      }
+    }
+
+    // 5) Handle an answer click
+    function pick(ans) {
+      if (idx >= questions.length) return;
+      if (ans === questions[idx].answer) {
+        qEl.style.backgroundColor = "green";
+        score++;
+      } else {
+        qEl.style.backgroundColor = "red";
+      }
+      setTimeout(() => {
+        idx++;
+        show();
+      }, 1000);
+    }
+
+    // 6) Wire up the buttons
+    document.getElementById("btn-true").onclick  = () => pick("True");
+    document.getElementById("btn-false").onclick = () => pick("False");
+
+    // 7) First render
+    show();
+  </script>
+</body>
+</html>
